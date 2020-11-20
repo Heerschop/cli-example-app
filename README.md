@@ -1,4 +1,4 @@
-# Example App for using ionic and capacitor from the CLI
+# App for using ionic and capacitor from the CLI
 
 Leverages the [ionic hooks](https://ionicframework.com/docs/cli/configuration#hooks) and [script-launcher](https://www.npmjs.com/package/script-launcher) for enabling building apps form the cli. 
 
