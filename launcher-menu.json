@@ -1,0 +1,54 @@
+{
+  "menu": {
+    "description": "action",
+    "serve:Builds and serves your app, rebuilding on file changes.": {
+      "description": "platform",
+      "app:Mobile App in browser": {
+        "description": "environment",
+        "dev:Development": "serve:",
+        "prd:Production": "serve:production"
+      },
+      "android:Google Android device with livereload": {
+        "description": "environment",
+        "dev:Development": "deploy:android: --livereload",
+        "prd:Production": "deploy:android:production --livereload"
+      },
+      "ios:Apple iPhone device with livereload": {
+        "description": "environment",
+        "dev:Development": "deploy:ios: --livereload",
+        "prd:Production": "deploy:ios:production --livereload"
+      }
+    },
+    "build:Compiles your app into an output directory.": {
+      "description": "platform",
+      "android:Google Android": {
+        "description": "environment",
+        "dev:Development": "build:android:",
+        "prd:Production": "build:android:production"
+      },
+      "ios:Apple iPhone": {
+        "description": "environment",
+        "dev:Development": "build:ios:",
+        "prd:Production": "build:ios:production"
+      }
+    },
+    "deploy:Build your app and deploy it to the selected environment.": {
+      "description": "platform",
+      "android:Google Android": {
+        "description": "environment",
+        "dev:Development": "deploy:android:",
+        "prd:Production": "deploy:android:production"
+      },
+      "ios:Apple iPhone": {
+        "description": "environment",
+        "dev:Development": "deploy:ios:",
+        "prd:Production": "deploy:ios:production"
+      }
+    }
+  },
+  "options": {
+    "menu": {
+      "defaultChoice": "serve:"
+    }
+  }
+}
