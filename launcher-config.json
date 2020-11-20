@@ -1,71 +1,71 @@
 {
   "scripts": {
     "serve:$config=": "ionic serve --configuration=$config",
-    "build:$project:$config": [
+    "build:$project:$config=": [
       "echo ${launch_style_bold}Building version:$launch_style_dim $npm_package_version$launch_style_normal",
       "",
       "ionic:build:$project --configuration=$config"
+    ],
+    "ionic:build:android": [
+      "type $ANDROID_HOME/tools/bin/sdkmanager",
+      "type gradle",
+      "",
+      "ionic capacitor build android --no-open $*"
+    ],
+    "ionic:build:ios": [
+      "type codesign",
+      "",
+      "rm -rf ios/App/build",
+      "ionic capacitor build ios --no-open $*"
+    ],
+    "livereload:android:$config": [
+      "adb reverse tcp:4200 tcp:4200",
+      "deploy:android:$config --livereload --port=4200"
+    ],
+    "livereload:ios:$config": [
+      "not:implemented"
+    ],
+    "ionic:capacitor:run:before:android": [
+      "android",
+      "./gradlew installDebug",
+      "adb shell am start -n $IONIC_CLI_HOOK_CTX_CAPACITOR_APP_ID/.MainActivity"
+    ],
+    "ionic:capacitor:build:before:android": [
+      "android",
+      "./gradlew build",
+      "",
+      "ls -1 app/build/outputs/apk/**/*.apk"
+    ],
+    "ionic:capacitor:run:before:ios": [
+      "ios/App",
+      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration debug",
+      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-debug-options.plist -exportPath build",
+      "mv build/App.ipa build/debug-app.ipa",
+      "ls -1 build/*.ipa",
+      "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
+      "native-run ios --app build/debug-app.ipa --device"
+    ],
+    "ionic:capacitor:build:before:ios": [
+      "ios/App",
+      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration Release",
+      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-store-options.plist -exportPath build",
+      "mv build/App.ipa build/store-app.ipa",
+      "ls -1 build/*.ipa"
+    ],
+    "deploy:android:$config": [
+      "type $ANDROID_HOME/tools/bin/sdkmanager",
+      "type gradle",
+      "",
+      "ionic capacitor run android --no-open --configuration=$config $*"
+    ],
+    "deploy:ios:$config": [
+      "type codesign",
+      "",
+      "ionic capacitor run ios --no-open --configuration=$config $*"
+    ],
+    "not:implemented": [
+      "echo ${launch_style_bold}${launch_style_red}Not implemented!$launch_style_normal",
+      "exit 1"
     ]
-  },
-  "ionic:build:android": [
-    "type $ANDROID_HOME/tools/bin/sdkmanager",
-    "type gradle",
-    "",
-    "ionic capacitor build android --no-open $*"
-  ],
-  "ionic:build:ios": [
-    "type codesign",
-    "",
-    "rm -rf ios/App/build",
-    "ionic capacitor build ios --no-open $*"
-  ],
-  "livereload:android:$config": [
-    "adb reverse tcp:4200 tcp:4200",
-    "deploy:android:$config --livereload --port=4200"
-  ],
-  "livereload:ios:$config": [
-    "not:implemented"
-  ],
-  "ionic:capacitor:run:before:android": [
-    "android",
-    "./gradlew installDebug",
-    "adb shell am start -n $IONIC_CLI_HOOK_CTX_CAPACITOR_APP_ID/.MainActivity"
-  ],
-  "ionic:capacitor:build:before:android": [
-    "android",
-    "./gradlew build",
-    "",
-    "ls -1 app/build/outputs/apk/**/*.apk"
-  ],
-  "ionic:capacitor:run:before:ios": [
-    "ios/App",
-    "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration debug",
-    "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-debug-options.plist -exportPath build",
-    "mv build/App.ipa build/debug-app.ipa",
-    "ls -1 build/*.ipa",
-    "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
-    "native-run ios --app build/debug-app.ipa --device"
-  ],
-  "ionic:capacitor:build:before:ios": [
-    "ios/App",
-    "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration Release",
-    "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-store-options.plist -exportPath build",
-    "mv build/App.ipa build/store-app.ipa",
-    "ls -1 build/*.ipa"
-  ],
-  "deploy:android:$config": [
-    "type $ANDROID_HOME/tools/bin/sdkmanager",
-    "type gradle",
-    "",
-    "ionic capacitor run android --no-open --configuration=$config $*"
-  ],
-  "deploy:ios:$config": [
-    "type codesign",
-    "",
-    "ionic capacitor run ios --no-open --configuration=$config $*"
-  ],
-  "not:implemented": [
-    "echo ${launch_style_bold}${launch_style_red}Not implemented!$launch_style_normal",
-    "exit 1"
-  ]
+  }
 }
