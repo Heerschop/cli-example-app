@@ -18,11 +18,11 @@
       "rm -rf ios/App/build",
       "ionic capacitor build ios --no-open $*"
     ],
-    "livereload:android:$config": [
-      "adb reverse tcp:4200 tcp:4200",
-      "deploy:android:$config --livereload --port=4200"
+    "livereload:android:$config=": [
+      "adb reverse tcp:8100 tcp:8100",
+      "deploy:android:$config --livereload --port=8100"
     ],
-    "livereload:ios:$config": [
+    "livereload:ios:$config=": [
       "not:implemented"
     ],
     "ionic:capacitor:run:before:android": [
@@ -52,13 +52,13 @@
       "mv build/App.ipa build/store-app.ipa",
       "ls -1 build/*.ipa"
     ],
-    "deploy:android:$config": [
+    "deploy:android:$config=": [
       "type $ANDROID_HOME/tools/bin/sdkmanager",
       "type gradle",
       "",
       "ionic capacitor run android --no-open --configuration=$config $*"
     ],
-    "deploy:ios:$config": [
+    "deploy:ios:$config=": [
       "type codesign",
       "",
       "ionic capacitor run ios --no-open --configuration=$config $*"
