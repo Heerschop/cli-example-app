@@ -17,6 +17,7 @@ npx ionic build
 ```
 
 ### Use the [launcher menu](https://www.npmjs.com/package/script-launcher#interactive-menu) for building 
+When using serve (--livereload) for Android make sure WIFI is enabled on the phone.
 ``` bash
 npm start
 ```
