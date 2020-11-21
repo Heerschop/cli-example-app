@@ -24,71 +24,24 @@ npm start
 
 ### Use CLI for building Android apps
 ``` bash
-npm start build:android
-npm start build:android:production
+# Build Android debug apk
+npx ionic capacitor build android --no-open
+# Build Android Production apk
+npx ionic capacitor build android --no-open --configuration=production
 ```
-
 
 ### Use CLI for building iOS apps
-Create the `ios/App/export-store-options.plist` and `ios/App/export-debug-options.plist` files.
-
-#### Example debug plist:
-``` xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>compileBitcode</key>
-    <false/>
-    <key>method</key>
-    <string>development</string>
-    <key>teamID</key>
-    <string>XXXXXXXXXX</string>
-    <key>provisioningProfiles</key>
-    <dict>
-      <key>io.ionic.starter</key>
-      <string>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</string>
-    </dict>
-    <key>signingStyle</key>
-    <string>manual</string>
-    <key>signingCertificate</key>
-    <string>iPhone Developer</string>
-  </dict>
-</plist>
-```
-
-#### Example store plist:
-``` xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>compileBitcode</key>
-    <false/>
-    <key>method</key>
-    <string>app-store</string>
-    <key>teamID</key>
-    <string>XXXXXXXXXX</string>
-    <key>provisioningProfiles</key>
-    <dict>
-      <key>io.ionic.starter</key>
-      <string>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</string>
-    </dict>
-    <key>signingStyle</key>
-    <string>manual</string>
-    <key>signingCertificate</key>
-    <string>iPhone Distribution</string>
-  </dict>
-</plist>
-```
-
-
-
-
-
+Update the `export-store-options.plist` and `export-debug-options.plist` files.
 ``` bash
-npm start build:ios
-npm start build:ios:production
+# Create to ios project files
+npx ionic capacitor update ios
+
+# Open xcode to configure **Signing & Capabilities**
+npx ionic capacitor open ios 
+
+# Build iOS debug IPA
+npx ionic capacitor build ios --no-open
+
+# Build iOS Production IPA
+npx ionic capacitor build ios --no-open --configuration=production
 ```
-
-

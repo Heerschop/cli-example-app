@@ -39,7 +39,7 @@
     "ionic:capacitor:run:before:ios": [
       "ios/App",
       "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration debug",
-      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-debug-options.plist -exportPath build",
+      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist ../../export-debug-options.plist -exportPath build",
       "mv build/App.ipa build/debug-app.ipa",
       "ls -1 build/*.ipa",
       "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
@@ -48,7 +48,7 @@
     "ionic:capacitor:build:before:ios": [
       "ios/App",
       "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration Release",
-      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist export-store-options.plist -exportPath build",
+      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist ../../export-store-options.plist -exportPath build",
       "mv build/App.ipa build/store-app.ipa",
       "ls -1 build/*.ipa"
     ],
