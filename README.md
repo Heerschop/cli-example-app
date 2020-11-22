@@ -17,7 +17,7 @@ npx ionic build
 ```
 
 ### Use the [launcher menu](https://www.npmjs.com/package/script-launcher#interactive-menu) for building 
-When using serve (--livereload) for Android make sure WIFI is enabled on the phone.
+When using serve (--livereload) for Android make sure WIFI is enabled on the phone and for iOS make sure the iOS device can access the IP address of the Mac being used.
 ``` bash
 npm start
 ```
@@ -32,7 +32,7 @@ npx ionic capacitor run android --no-open
 
 # Run Android debug IPA with livereload
 adb reverse tcp:8100 tcp:8100
-npx ionic capacitor run ios --no-open --livereload --port=8100
+npx ionic capacitor run android --no-open --livereload --port=8100
 ```
 
 ### Use CLI for building iOS apps
