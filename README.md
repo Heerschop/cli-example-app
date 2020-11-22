@@ -36,7 +36,7 @@ npx ionic capacitor run ios --no-open --livereload --port=8100
 ```
 
 ### Use CLI for building iOS apps
-Update the `export-store-options.plist` and `export-debug-options.plist` files. For livereload to work, make sure the iOS device can access the IP address op the Mac being used.
+Update the `export-store-options.plist` and `export-debug-options.plist` files. For livereload to work, make sure the iOS device can access the IP address of the Mac being used.
 ``` bash
 # Create to ios project files
 npx ionic capacitor update ios
@@ -51,5 +51,5 @@ npx ionic capacitor build ios --no-open
 npx ionic capacitor run ios --no-open
 
 # Run iOS debug IPA with livereload
-npx ionic capacitor run ios --no-open --livereload --host=$MAC_PUBLIC_IP --port=8100
+npx ionic capacitor run ios --no-open --livereload --external --port=8100
 ```

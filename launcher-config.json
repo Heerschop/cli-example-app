@@ -14,7 +14,7 @@
       "deploy:android:$config --livereload --port=8100"
     ],
     "livereload:ios:$config=": [
-      "deploy:ios:$config --livereload --host=$(ipconfig getifaddr en0) --port=8100"
+      "deploy:ios:$config --livereload --external --port=8100"
     ],
     "ionic:build:$platform": [
       "ionic capacitor build $platform --no-open $*"
