@@ -6,24 +6,18 @@
       "",
       "ionic:build:$project --configuration=$config"
     ],
-    "ionic:build:android": [
-      "type $ANDROID_HOME/tools/bin/sdkmanager",
-      "type gradle",
-      "",
-      "ionic capacitor build android --no-open $*"
-    ],
-    "ionic:build:ios": [
-      "type codesign",
-      "",
-      "rm -rf ios/App/build",
-      "ionic capacitor build ios --no-open $*"
+    "deploy:$platform:$config=": [
+      "ionic capacitor run $platform --no-open --configuration=$config $*"
     ],
     "livereload:android:$config=": [
       "adb reverse tcp:8100 tcp:8100",
       "deploy:android:$config --livereload --port=8100"
     ],
     "livereload:ios:$config=": [
-      "not:implemented"
+      "deploy:ios:$config --livereload --host=$(ipconfig getifaddr en0) --port=8100"
+    ],
+    "ionic:build:$platform": [
+      "ionic capacitor build $platform --no-open $*"
     ],
     "ionic:capacitor:run:before:android": [
       "android",
@@ -38,30 +32,21 @@
     ],
     "ionic:capacitor:run:before:ios": [
       "ios/App",
-      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration debug",
-      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist ../../export-debug-options.plist -exportPath build",
-      "mv build/App.ipa build/debug-app.ipa",
-      "ls -1 build/*.ipa",
+      "rm -rf Archive",
+      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath Archive/App.xcarchive -configuration debug",
+      "xcodebuild -exportArchive -archivePath Archive/App.xcarchive -exportOptionsPlist ../../export-debug-options.plist -exportPath Archive",
+      "mv Archive/App.ipa Archive/debug-app.ipa",
+      "ls -1 Archive/*.ipa",
       "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
-      "native-run ios --app build/debug-app.ipa --device"
+      "native-run ios --app Archive/debug-app.ipa --device"
     ],
     "ionic:capacitor:build:before:ios": [
       "ios/App",
-      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath build/App.xcarchive -configuration Release",
-      "xcodebuild -exportArchive -archivePath build/App.xcarchive -exportOptionsPlist ../../export-store-options.plist -exportPath build",
-      "mv build/App.ipa build/store-app.ipa",
-      "ls -1 build/*.ipa"
-    ],
-    "deploy:android:$config=": [
-      "type $ANDROID_HOME/tools/bin/sdkmanager",
-      "type gradle",
-      "",
-      "ionic capacitor run android --no-open --configuration=$config $*"
-    ],
-    "deploy:ios:$config=": [
-      "type codesign",
-      "",
-      "ionic capacitor run ios --no-open --configuration=$config $*"
+      "rm -rf Archive",
+      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath Archive/App.xcarchive -configuration Release",
+      "xcodebuild -exportArchive -archivePath Archive/App.xcarchive -exportOptionsPlist ../../export-store-options.plist -exportPath Archive",
+      "mv Archive/App.ipa Archive/store-app.ipa",
+      "ls -1 Archive/*.ipa"
     ],
     "not:implemented": [
       "echo ${launch_style_bold}${launch_style_red}Not implemented!$launch_style_normal",

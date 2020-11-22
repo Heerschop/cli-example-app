@@ -22,26 +22,34 @@ When using serve (--livereload) for Android make sure WIFI is enabled on the pho
 npm start
 ```
 
-### Use CLI for building Android apps
+### Use CLI for building or running Android apps
 ``` bash
 # Build Android debug apk
 npx ionic capacitor build android --no-open
-# Build Android Production apk
-npx ionic capacitor build android --no-open --configuration=production
+
+# Run Android debug apk
+npx ionic capacitor run android --no-open
+
+# Run Android debug IPA with livereload
+adb reverse tcp:8100 tcp:8100
+npx ionic capacitor run ios --no-open --livereload --port=8100
 ```
 
 ### Use CLI for building iOS apps
-Update the `export-store-options.plist` and `export-debug-options.plist` files.
+Update the `export-store-options.plist` and `export-debug-options.plist` files. For livereload to work, make sure the iOS device can access the IP address op the Mac being used.
 ``` bash
 # Create to ios project files
 npx ionic capacitor update ios
 
 # Open xcode to configure **Signing & Capabilities**
-npx ionic capacitor open ios 
+npx ionic capacitor open ios
 
 # Build iOS debug IPA
 npx ionic capacitor build ios --no-open
 
-# Build iOS Production IPA
-npx ionic capacitor build ios --no-open --configuration=production
+# Run iOS debug IPA
+npx ionic capacitor run ios --no-open
+
+# Run iOS debug IPA with livereload
+npx ionic capacitor run ios --no-open --livereload --host=$MAC_PUBLIC_IP --port=8100
 ```

@@ -10,13 +10,13 @@
       },
       "android:Google Android device with livereload": {
         "description": "environment",
-        "dev:Development": "deploy:android: --livereload",
-        "prd:Production": "deploy:android:production --livereload"
+        "dev:Development": "livereload:android:",
+        "prd:Production": "livereload:android:production"
       },
       "ios:Apple iPhone device with livereload": {
         "description": "environment",
-        "dev:Development": "deploy:ios: --livereload",
-        "prd:Production": "deploy:ios:production --livereload"
+        "dev:Development": "livereload:ios:",
+        "prd:Production": "livereload:ios:production"
       }
     },
     "build:Compiles your app into an output directory.": {
