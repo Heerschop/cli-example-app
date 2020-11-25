@@ -36,16 +36,16 @@ npx ionic capacitor run android --no-open --livereload --port=8100
 ```
 
 ### Use CLI for building iOS apps
-Update the `export-store-options.plist` and `export-debug-options.plist` files. For livereload to work, make sure the iOS device can access the IP address of the Mac being used.
+Update the `capacitor.config.json`, `export-store-options.plist` and `export-debug-options.plist` files matching the system setup. For livereload to work, make sure the iOS device can access the IP address of the Mac being used.
 ``` bash
 # Create to ios project files
 npx ionic capacitor update ios
 
-# Open xcode to configure **Signing & Capabilities**
+# Open xcode to configure **Signing & Capabilities** corresponding with the previously updated files.
 npx ionic capacitor open ios
 
 # Build iOS debug IPA
-npx ionic capacitor build ios --no-open
+npx ionic capacitor build ios --no-open --configuration=production
 
 # Run iOS debug IPA
 npx ionic capacitor run ios --no-open

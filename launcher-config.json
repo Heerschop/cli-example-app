@@ -1,10 +1,10 @@
 {
   "scripts": {
     "serve:$config=": "ionic serve --configuration=$config",
-    "build:$project:$config=": [
+    "build:$platform:$config=": [
       "echo ${launch_style_bold}Building version:$launch_style_dim $npm_package_version$launch_style_normal",
       "",
-      "ionic:build:$project --configuration=$config"
+      "ionic:build:$platform --configuration=$config"
     ],
     "deploy:$platform:$config=": [
       "ionic capacitor run $platform --no-open --configuration=$config $*"
@@ -33,8 +33,8 @@
     "ionic:capacitor:run:before:ios": [
       "ios/App",
       "rm -rf Archive",
-      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath Archive/App.xcarchive -configuration debug",
-      "xcodebuild -exportArchive -archivePath Archive/App.xcarchive -exportOptionsPlist ../../export-debug-options.plist -exportPath Archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Debug clean archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-debug-options.plist -exportPath Archive",
       "mv Archive/App.ipa Archive/debug-app.ipa",
       "ls -1 Archive/*.ipa",
       "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
@@ -43,14 +43,10 @@
     "ionic:capacitor:build:before:ios": [
       "ios/App",
       "rm -rf Archive",
-      "xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath Archive/App.xcarchive -configuration Release",
-      "xcodebuild -exportArchive -archivePath Archive/App.xcarchive -exportOptionsPlist ../../export-store-options.plist -exportPath Archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Release clean archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-store-options.plist -exportPath Archive",
       "mv Archive/App.ipa Archive/store-app.ipa",
       "ls -1 Archive/*.ipa"
-    ],
-    "not:implemented": [
-      "echo ${launch_style_bold}${launch_style_red}Not implemented!$launch_style_normal",
-      "exit 1"
     ]
   }
 }
