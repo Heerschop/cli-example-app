@@ -33,8 +33,8 @@
     "ionic:capacitor:run:before:ios": [
       "ios/App",
       "rm -rf Archive",
-      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Debug clean archive",
-      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-debug-options.plist -exportPath Archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Debug clean archive | cut -c -8192",
+      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-debug-options.plist -exportPath Archive | cut -c -8192",
       "mv Archive/App.ipa Archive/debug-app.ipa",
       "ls -1 Archive/*.ipa",
       "#native-run ios --app build/debug-app.ipa --target F27EB605-20BE-41C9-81C8-BE378B9BA8ED",
@@ -43,8 +43,8 @@
     "ionic:capacitor:build:before:ios": [
       "ios/App",
       "rm -rf Archive",
-      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Release clean archive",
-      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-store-options.plist -exportPath Archive",
+      "xcodebuild -archivePath Archive/App.xcarchive -workspace App.xcworkspace -scheme App -configuration Release clean archive | cut -c -8192",
+      "xcodebuild -archivePath Archive/App.xcarchive -exportArchive -exportOptionsPlist ../../export-store-options.plist -exportPath Archive | cut -c -8192",
       "mv Archive/App.ipa Archive/store-app.ipa",
       "ls -1 Archive/*.ipa"
     ]
